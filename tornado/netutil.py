@@ -64,15 +64,8 @@ if hasattr(ssl, 'SSLContext'):
         # Python 2.7.9+, 3.4+
         # Note that the naming of ssl.Purpose is confusing; the purpose
         # of a context is to authentiate the opposite side of the connection.
-        try:
-            _client_ssl_defaults = ssl.create_default_context(
-                ssl.Purpose.SERVER_AUTH)
-            _server_ssl_defaults = ssl.create_default_context(
-                ssl.Purpose.CLIENT_AUTH)
-        except Exception:
-            _client_ssl_defaults = dict(cert_reqs=None,
-                                        ca_certs=None)
-            _server_ssl_defaults = {}
+        _client_ssl_defaults = dict(cert_reqs=None, ca_certs=None)
+        _server_ssl_defaults = {}
     else:
         # Python 3.2-3.3
         _client_ssl_defaults = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
